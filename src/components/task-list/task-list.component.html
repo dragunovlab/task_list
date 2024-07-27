@@ -1,0 +1,15 @@
+<div class="task-list__container">
+    <div class="task-list__add">
+        <div class="task-list__form">
+            <form [formGroup]="form">
+                <input type="text" formControlName="title" placeholder="New task">
+            </form>
+        </div>
+        <br>
+        <button class="task-list__add-btn" type="submit" [disabled]="!form.valid" (click)="addTask()">Add task</button>
+    </div>
+    <div class="task-list__wrapper" *ngFor="let item of taskManagerService.taskList; trackBy: trackByFn">
+        <app-task [title]="item.title" (deleteEvent)="deleteTask(item.id!)" (editEvent)="editTask(item.id!)">
+        </app-task>
+    </div>
+</div>

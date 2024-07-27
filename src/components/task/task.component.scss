@@ -1,0 +1,29 @@
+.task  {
+
+    &__container {
+        background-color: rgb(184, 180, 180);
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    &__card {
+        display: flex;
+        align-items: center;
+        padding: 48px;
+        justify-content: space-between;
+    }
+
+    &__btn {
+        padding: 24px;
+        border-radius: 16px;
+        border: none;
+        background-color: aquamarine;
+        margin-left: 20px;
+        width: 100px;
+        cursor: pointer;
+    }
+
+    &__actions {
+        display: flex;
+    }
+}
