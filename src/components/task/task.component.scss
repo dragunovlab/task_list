@@ -23,6 +23,15 @@
         cursor: pointer;
     }
 
+    &__title {
+        cursor: pointer;
+    }
+
+    &__edit {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__actions {
         display: flex;
     }

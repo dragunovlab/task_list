@@ -19,7 +19,15 @@ export class TaskManagerService {
         this._taskList = this._taskList.filter(item => item.id !== id);
     }
 
-    public editTask(id: string): void {
+    public editTask(task: ITask): void {
+        this._taskList = this._taskList.map(item => {
+            if (item.id === task.id) {
+                return task
+            }
 
+            return item;
+        });
+
+        console.log(this._taskList);
     }
 }

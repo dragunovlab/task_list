@@ -17,8 +17,9 @@ import { TaskManagerService } from '../../services/taks-manager.service';
     styleUrl: './task-list.component.scss'
 })
 export class TaskListComponent {
-    
+
     public readonly form: FormGroup = new FormGroup({ title: new FormControl<string>('', Validators.required) });
+    public isEdit: boolean = false;
     public readonly taskManagerService: TaskManagerService = inject(TaskManagerService);
 
     public addTask(): void {
@@ -31,8 +32,14 @@ export class TaskListComponent {
         this.taskManagerService.deleteTask(id);
     }
 
-    public editTask(id: string): void {
-        this.taskManagerService.editTask(id);
+    public changeTask(): void {
+        this.isEdit = !this.isEdit;
+    }
+
+    public saveEdit(title: string, id: string): void {
+        const req: ITask = { title, id };
+        this.isEdit = false;
+        this.taskManagerService.editTask(req);
     }
 
     public trackByFn(index: number, item: ITask): string {
