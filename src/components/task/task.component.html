@@ -1,6 +1,6 @@
 <div class="task__container">
     <div class="task__card">
-        <h2 class="task__title" (click)="editTask()" *ngIf="!isEdit; else tempEdit">{{ title }}</h2>
+        <h2 class="task__title" (click)="editTask(item.id!)" *ngIf="item.id !== id; else tempEdit">{{ item.title }}</h2>
 
         <ng-template #tempEdit>
             <div class="task__edit">
@@ -10,8 +10,11 @@
         </ng-template>
 
         <div class="task__actions">
-            <input type="checkbox">
+            <input type="checkbox" (click)="completeTask()">
             <button class="task__btn" (click)="deleteTask()">Delete</button>
         </div>
     </div>
 </div>
+
+<!-- ДЗ -->
+<!-- в зависимости от значения чекбокса true/false прибавлять к счетчику значения -->

@@ -1,16 +1,23 @@
 <div class="task-list__container">
     <div class="task-list__add">
-        <div class="task-list__form">
-            <form [formGroup]="form">
-                <input type="text" formControlName="title" placeholder="New task">
-            </form>
+        <div class="task-list__wrapper-form">
+            <div>
+                <div class="task-list__form">
+                    <form [formGroup]="form">
+                        <input type="text" formControlName="title" placeholder="New task">
+                    </form>
+                </div>
+                <br>
+                <button class="task-list__add-btn" type="submit" [disabled]="!form.valid" (click)="addTask()">Add task</button>
+            </div>
+            <div class="task-list__counter">
+                <h1>Выполненные задачи: {{ counter }}</h1>
+            </div>
         </div>
-        <br>
-        <button class="task-list__add-btn" type="submit" [disabled]="!form.valid" (click)="addTask()">Add task</button>
     </div>
     <div class="task-list__wrapper" *ngFor="let item of taskManagerService.taskList; trackBy: trackByFn">
-        <app-task [title]="item.title" [isEdit]="isEdit" (deleteEvent)="deleteTask(item.id!)" (editEvent)="changeTask()"
-            (saveEvent)="saveEdit($event, item.id!)">
+        <app-task [item]="item" [id]="taskId" (deleteEvent)="deleteTask(item.id!)" (editEvent)="changeTask($event)"
+            (saveEvent)="saveEdit($event, item.id!)" (completeEvent)="changeCounter()">
         </app-task>
     </div>
 </div>
