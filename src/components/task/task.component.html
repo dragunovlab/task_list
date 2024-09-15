@@ -10,11 +10,8 @@
         </ng-template>
 
         <div class="task__actions">
-            <input type="checkbox" (click)="completeTask()">
+            <input type="checkbox" (change)="completeTask($event)">
             <button class="task__btn" (click)="deleteTask()">Delete</button>
         </div>
     </div>
 </div>
-
-<!-- ДЗ -->
-<!-- в зависимости от значения чекбокса true/false прибавлять к счетчику значения -->

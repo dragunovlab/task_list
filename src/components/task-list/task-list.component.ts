@@ -31,7 +31,6 @@ export class TaskListComponent {
 
     public deleteTask(id: string): void {
         this.taskManagerService.deleteTask(id);
-        this.counter--;
     }
 
     public changeTask(id: string): void {
@@ -44,8 +43,8 @@ export class TaskListComponent {
         this.taskManagerService.editTask(req);
     }
 
-    public changeCounter(): void {
-        this.counter++;
+    public changeCounter(event: boolean): void {
+        event ? this.counter++ : this.counter--;
     }
 
     public trackByFn(index: number, item: ITask): string {

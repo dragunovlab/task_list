@@ -17,7 +17,7 @@
     </div>
     <div class="task-list__wrapper" *ngFor="let item of taskManagerService.taskList; trackBy: trackByFn">
         <app-task [item]="item" [id]="taskId" (deleteEvent)="deleteTask(item.id!)" (editEvent)="changeTask($event)"
-            (saveEvent)="saveEdit($event, item.id!)" (completeEvent)="changeCounter()">
+            (saveEvent)="saveEdit($event, item.id!)" (completeEvent)="changeCounter($event)">
         </app-task>
     </div>
 </div>

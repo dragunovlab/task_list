@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
     public id!: string;
 
     @Output()
-    public completeEvent: EventEmitter<void> = new EventEmitter<void>();
+    public completeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @Output()
     public deleteEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -37,8 +37,8 @@ export class TaskComponent implements OnInit {
         this.control = new FormControl(this.item.title);
     }
 
-    public completeTask(): void {
-        this.completeEvent.emit();
+    public completeTask(event: any): void {
+        this.completeEvent.emit(event.target.checked);
     }
 
     public deleteTask(): void {
@@ -53,5 +53,6 @@ export class TaskComponent implements OnInit {
         this.saveEvent.emit(this.control.value);
     }
 }
+
 
 // dump - глупая компонента (не несет в себе никакой логики, а только отображение, принимает данные и отдает данные + эвенты)
