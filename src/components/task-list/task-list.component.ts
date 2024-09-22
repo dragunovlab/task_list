@@ -24,7 +24,7 @@ export class TaskListComponent {
     public readonly taskManagerService: TaskManagerService = inject(TaskManagerService);
 
     public addTask(): void {
-        const req: ITask = { title: this.form.controls['title'].value, id: uuidv4() };
+        const req: ITask = { title: this.form.controls['title'].value, id: uuidv4(), isCompleted: false };
         this.taskManagerService.addTask(req);
         this.form.reset();
     }
