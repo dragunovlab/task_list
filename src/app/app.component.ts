@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TaskListComponent } from '../components/task-list/task-list.component';
 import { TaskManagerService } from '../services/taks-manager.service';
 import { TaskStoreService } from '../services/task-store.service';
+import { fromEvent, map, Observable, Subject, Subscriber, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, TaskListComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    TaskListComponent
+  ],
   providers: [
     TaskManagerService,
     TaskStoreService
@@ -16,8 +21,51 @@ import { TaskStoreService } from '../services/task-store.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+
+  // RxJs
+
+  public destroy$: Subject<void> = new Subject<void>();
+  public stream$: Observable<string> = new Observable((observer: Subscriber<string>) => {
+    observer.next('10');
+    observer.next('7');
+    observer.next('15');
+    observer.next('20');
+    observer.next('30');
+  });
+
+  public ngOnInit(): void {
+    this.stream$
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe({
+        next: value => {
+          console.log(value);
+        },
+        error: () => {
+          console.log('error')
+        },
+        complete: () => {
+          console.log('complete')
+        }
+      });
+  }
+
+  public onUnSubscribe(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  public ngOnDestroy(): void {
+  }
+
 }
+
+
+// observer -> { next, error, complete }
+
+
 
 
 // ДЗ !!!
